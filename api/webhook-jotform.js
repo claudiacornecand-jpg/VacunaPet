@@ -66,13 +66,15 @@ Te enviaremos un recordatorio cerca de esa fecha.
       `
     });
 
-    // ===== GOOGLE CALENDAR =====
-    const auth = new google.auth.JWT(
-      process.env.GCAL_CLIENT_EMAIL,
-      null,
-      process.env.GCAL_PRIVATE_KEY.replace(/\\n/g, "\n"),
-      ["https://www.googleapis.com/auth/calendar"]
-    );
+  // ===== GOOGLE CALENDAR =====
+const privateKey = process.env.GCAL_PRIVATE_KEY?.replace(/\\n/g, "\n");
+
+const auth = new google.auth.JWT(
+  process.env.GCAL_CLIENT_EMAIL,
+  null,
+  privateKey,
+  ["https://www.googleapis.com/auth/calendar"]
+);
 
     const calendar = google.calendar({ version: "v3", auth });
 
